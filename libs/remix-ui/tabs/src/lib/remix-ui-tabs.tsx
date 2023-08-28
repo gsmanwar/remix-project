@@ -177,6 +177,9 @@ export const TabsUI = (props: TabsUIProps) => {
               } else if (tabsState.currentExt === 'sol' || tabsState.currentExt === 'yul') {
                 await props.plugin.call('solidity', 'compile', path)
                 _paq.push(['trackEvent', 'editor', 'clickRunFromEditor', tabsState.currentExt])
+              } else if (tabsState.currentExt === 'circom') {
+                await props.plugin.call('circuit-compiler', 'compile', path)
+                _paq.push(['trackEvent', 'editor', 'clickRunFromEditor', tabsState.currentExt])
               }
             }}
           >
@@ -187,7 +190,7 @@ export const TabsUI = (props: TabsUIProps) => {
                 <span>
                   {tabsState.currentExt === 'js' || tabsState.currentExt === 'ts'
                     ? 'Run script (CTRL + SHIFT + S)'
-                    : tabsState.currentExt === 'sol' || tabsState.currentExt === 'yul'
+                    : tabsState.currentExt === 'sol' || tabsState.currentExt === 'yul' || tabsState.currentExt === 'circom'
                       ? 'Compile CTRL + S'
                       : 'Select .sol or .yul file to compile or a .ts or .js file and run it'}
                 </span>
